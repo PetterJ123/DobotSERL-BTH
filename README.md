@@ -9,7 +9,7 @@ Feel free to improve this repository as you wish!
 
 ## Installation
 
-###**Attention!**
+**Attention!**
 Before you begin installing any Dobot related, you should make sure you have Python installed. This link should help:
 [Python 3 Installation]
 (https://docs.python-guide.org/starting/install3/osx/)
