@@ -19,7 +19,7 @@ amt_stack1 = 0
 stack1_height = 0
 
 # stack to take objects from
-amt_stack2 = 3
+amt_stack2 = 2
 stack2_height = 0
 
 # make sure cmd queue is clear
@@ -87,6 +87,10 @@ while(True):
 	amt_stack1 += 1
 
 	dType.SetPTPCommonParams(api, 100, 200)
+
+# == FIX ==
+# Speed at pickup
+# What happens after the dobot is done moving bricks
 
 
 # == EXTRA FEATURES ==
