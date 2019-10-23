@@ -105,6 +105,7 @@ while(True):
 
 # == FIX ==
 # Speed at pickup and drop
+# Change height at before pickup of bricks
 
 # == EXTRA ==
 # Using different colored LEGO-bricks
