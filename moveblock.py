@@ -4,6 +4,8 @@ homeZ = 40
 homeR = -3
 temp = 0
 rEndEff = 21
+velrat = 100
+accrat = 200
 
 # stack variables
 STACK1X = 242.50
@@ -19,8 +21,10 @@ amt_stack1 = 0
 stack1_height = 0
 
 # stack to take objects from
+# ==========================
 amt_stack2 = 2
 stack2_height = 0
+#===========================
 
 # make sure cmd queue is clear
 dType.SetQueuedCmdClear(api)
@@ -35,7 +39,7 @@ dType.SetPTPCoordinateParams(api,200,200,200,200)
 
 #setptpcommonparams
 #(api, velocity ratio, acceleration ratio)
-dType.SetPTPCommonParams(api, 100, 200)
+dType.SetPTPCommonParams(api, velrat, accrat)
 
 #setptpjumpparams
 #api, jumpheight, zlimit
@@ -55,7 +59,7 @@ while(True):
 	on_status = 0
 
 	# change speed
-	dType.SetPTPCommonParams(api, 10, 100)
+	#dType.SetPTPCommonParams(api, 20, 200)
 
 	# move straight down
 	if amt_stack2 > 0:
@@ -65,7 +69,6 @@ while(True):
 		amt_stack2 -= 1
 		dType.SetPTPCommonParams(api, 100, 200)
 	else:
-		print("Empty stack error, put some blocks in the stack")
 		break
 
 	# move arm to stack it is supposed to put objects (stack1)
@@ -73,7 +76,7 @@ while(True):
 
 	# move arm downward
 	if amt_stack2 >= 0:
-		dType.SetPTPCommonParams(api, 10, 100)
+		#dType.SetPTPCommonParams(api, 20, 200)
 
 		if amt_stack1 == 0:
 			STACK1_TOP = BOTTOM + BLOCK_HEIGHT
@@ -89,11 +92,7 @@ while(True):
 	dType.SetPTPCommonParams(api, 100, 200)
 
 # == FIX ==
-# Speed at pickup
-# What happens after the dobot is done moving bricks
+# Speed at pickup and drop
 
-
-# == EXTRA FEATURES ==
-# counter for amount of blocks picked up
-# after amount reached ceiling, start other section of program
-# other section being doing something else like engraving
+# == EXTRA ==
+# Using different colored LEGO-bricks
