@@ -5,6 +5,8 @@ This is a script that I have developed for a customer at BTH (Blekinge Tekniska 
 
 Feel free to improve this repository as you wish!
 
+The master branch is the "official release" of this project. It has the features that are tested and "guaranteed" to work. The devel branch is branch for development where new features are worked on and pushed to before they can be qualified for "release". 
+
 ## Installation
 
 **Attention!**
