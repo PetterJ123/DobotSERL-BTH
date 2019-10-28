@@ -1,3 +1,5 @@
+import clawfunc
+
 homeX = 207
 homeY = -5
 homeZ = 40
@@ -19,10 +21,11 @@ BLOCK_HEIGHT = 29
 # stack to put objects
 amt_stack1 = 0
 stack1_height = 0
+attachment = "suction"	# Change this value to either "claw" or "suction"
 
 # stack to take objects from
 # ==========================
-amt_stack2 = 2
+amt_stack2 = 3
 stack2_height = 0
 #===========================
 
@@ -45,67 +48,70 @@ dType.SetPTPCommonParams(api, velrat, accrat)
 #api, jumpheight, zlimit
 dType.SetPTPJumpParams(api, 20, 200)
 
-# eshtablish home position
+# calibrates the dobot magician
 dType.SetHOMEParams(api,  homeX,  homeY,  homeZ,  homeR, 1)
 dType.SetHOMECmd(api, temp, 1)
 
 # @param ctrl: enable or disable the control of end effector
 # @param onst: start or turn off end effector
 def turn_off_end(ctrl, onst):
-	dType.SetEndEffectorSuctionCup(api, ctrl,  onst, isQueued=0)
+	dType.SetEndEffectorSuctionCup(api, ctrl,  onst, 1)
 
 # @param x, y, z: coordinates in carteesian system
 # @param re: rotational coordinate for end effector
 def move_neutral(x, y, z, re):
 	dType.SetPTPCmd(api, dType.PTPMode.PTPMOVLXYZMode, x, y, z, rEndEff, 1)
 
-while(True):
-	# move arm to stack it is supposed to move objects from (stack2)
-	dType.SetPTPCmd(api, dType.PTPMode.PTPJUMPXYZMode, STACK2X, STACK2Y, STACKZ, rEndEff, 1)
+if attachment == "suction":
+	while(True):
+		# move arm to stack it is supposed to move objects from (stack2)
+		dType.SetPTPCmd(api, dType.PTPMode.PTPJUMPXYZMode, STACK2X, STACK2Y, STACKZ, rEndEff, 1)
 
-	# start suctioncup
-	on_status = 1
-	dType.SetEndEffectorSuctionCup(api, enable_ctrl, on_status, 1)
-	on_status = 0
+		# start suctioncup
+		on_status = 1
+		dType.SetEndEffectorSuctionCup(api, enable_ctrl, on_status, 1)
+		on_status = 0
 
-	# change speed
-	#dType.SetPTPCommonParams(api, 20, 200)
-
-	# move straight down
-	if amt_stack2 > 0:
-		stack2_height = amt_stack2 * BLOCK_HEIGHT
-		STACK2_TOP = stack2_height + BOTTOM
-		dType.SetPTPCmd(api, dType.PTPMode.PTPMOVLXYZMode, STACK2X, STACK2Y, STACK2_TOP, rEndEff, 1)
-		amt_stack2 -= 1
-		dType.SetPTPCommonParams(api, 100, 200)
-	else:
-		turn_off_end(0, 0)	# Turns off end effector
-		move_neutral(homeX, homeY, homeZ, 0)		# move to a neutral position
-		break
-
-	# move arm to stack it is supposed to put objects (stack1)
-	dType.SetPTPCmd(api, dType.PTPMode.PTPJUMPXYZMode, STACK1X, STACK1Y, STACKZ, rEndEff, 1)
-
-	# move arm downward
-	if amt_stack2 >= 0:
+		# change speed
 		#dType.SetPTPCommonParams(api, 20, 200)
 
-		if amt_stack1 == 0:
-			STACK1_TOP = BOTTOM + BLOCK_HEIGHT
-		elif amt_stack1 > 0:
-			STACK1_TOP += BLOCK_HEIGHT
+		# move straight down
+		if amt_stack2 > 0:
+			stack2_height = amt_stack2 * BLOCK_HEIGHT
+			STACK2_TOP = stack2_height + BOTTOM
+			dType.SetPTPCmd(api, dType.PTPMode.PTPMOVLXYZMode, STACK2X, STACK2Y, STACK2_TOP, rEndEff, 1)
+			amt_stack2 -= 1
+			dType.SetPTPCommonParams(api, 100, 200)
+		else:
+			turn_off_end(0, 0)	# Turns off end effector
+			move_neutral(homeX, homeY, homeZ, 0)		# move to a neutral position
+			break
 
-		dType.SetPTPCmd(api, dType.PTPMode.PTPMOVLXYZMode, STACK1X, STACK1Y, STACK1_TOP, rEndEff, 1)
+		# move arm to stack it is supposed to put objects (stack1)
+		dType.SetPTPCmd(api, dType.PTPMode.PTPJUMPXYZMode, STACK1X, STACK1Y, STACKZ, rEndEff, 1)
 
-	# executes the turnoff of suction cup
-	dType.SetEndEffectorSuctionCup(api, enable_ctrl, on_status, 1)
-	amt_stack1 += 1
+		# move arm downward
+		if amt_stack2 >= 0:
+			#dType.SetPTPCommonParams(api, 20, 200)
 
-	dType.SetPTPCommonParams(api, 100, 200)
+			if amt_stack1 == 0:
+				STACK1_TOP = BOTTOM + BLOCK_HEIGHT
+			elif amt_stack1 > 0:
+				STACK1_TOP += BLOCK_HEIGHT
 
-# == FIX ==
-# Speed at pickup and drop
-# Change height at before pickup of bricks
+			dType.SetPTPCmd(api, dType.PTPMode.PTPMOVLXYZMode, STACK1X, STACK1Y, STACK1_TOP, rEndEff, 1)
 
-# == EXTRA ==
-# Using different colored LEGO-bricks
+		# executes the turnoff of suction cup
+		dType.SetEndEffectorSuctionCup(api, enable_ctrl, on_status, 1)
+		amt_stack1 += 1
+
+		dType.SetPTPCommonParams(api, 100, 200)
+elif suction == "claw":
+	use_claw()
+
+# === FEATURES TO BE DEVELOPED ===
+# - Functionality to also use the gripper-attachment
+# - Functionality to specify a user made structure and then the robot will build it
+# - This file shall only contain code for the suctioncup-attachment, like done with claw-attachment
+# - Main.py file shall call the other modules (suctionfunc.py, clawfunc.py)
+# -
