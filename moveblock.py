@@ -52,7 +52,7 @@ dType.SetHOMECmd(api, temp, 1)
 # @param ctrl: enable or disable the control of end effector
 # @param onst: start or turn off end effector
 def turn_off_end(ctrl, onst):
-	dType.SetEndEffectorSuctionCup(api, ctrl,  onst, isQueued=0)
+	dType.SetEndEffectorSuctionCup(api, ctrl,  onst, 1)
 
 # @param x, y, z: coordinates in carteesian system
 # @param re: rotational coordinate for end effector
