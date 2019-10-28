@@ -1,3 +1,5 @@
+# This file is for using the claw attachment
+
 homeX = 207
 homeY = -5
 homeZ = 40

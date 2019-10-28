@@ -112,4 +112,6 @@ elif suction == "claw":
 # === FEATURES TO BE DEVELOPED ===
 # - Functionality to also use the gripper-attachment
 # - Functionality to specify a user made structure and then the robot will build it
-# -
+# - This file shall only contain code for the suctioncup-attachment, like done with claw-attachment
+# - Main.py file shall call the other modules (suctionfunc.py, clawfunc.py)
+# - 
