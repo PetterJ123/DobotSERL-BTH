@@ -9,8 +9,10 @@ Feel free to improve this repository as you wish!
 
 **Attention!**
 Before you begin installing any Dobot related, you should make sure you have Python installed. This link should help:
-[Python 3 Installation](https://docs.python-guide.org/starting/install/osx/).
 
+[Python 3 Windows](https://phoenixnap.com/kb/how-to-install-python-3-windows).
+
+[Python 3 Mac OS X](https://programwithus.com/learn-to-code/install-python3-mac/).
 ### Windows
 
 1. Download and install [DobotStudio](https://www.dobot.cc/downloadcenter/dobot-magician.html).
