@@ -12,6 +12,7 @@ The master branch is the "official release" of this project. It has the features
 **Attention!**
 Before you begin installing any Dobot related, you should make sure you have Python installed. This link should help:
 **Windows:**[Python 3 Windows](https://phoenixnap.com/kb/how-to-install-python-3-windows)
+
 **Mac OS X:**[Python 3 OS X](https://programwithus.com/learn-to-code/install-python3-mac/)
 
 ### Windows
